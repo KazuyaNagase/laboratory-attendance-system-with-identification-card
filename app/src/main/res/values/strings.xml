@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Laboratory Attendance System with Identification card</string>
+    <string name="enter">入室</string>
+    <string name="exit">退室</string>
+    <string name="enter_label">学生証をスマホの裏側にスキャンして入室</string>
+    <string name="exit_label">学生証をスマホの裏側にスキャンして退室</string>
 </resources>

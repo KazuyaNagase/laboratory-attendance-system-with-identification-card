@@ -1,6 +1,5 @@
 package com.geeksonthegate.laboratoryattendancesystemwithidentificationcard
 
-import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
@@ -46,13 +45,12 @@ class ScanStudentcardActivity : AppCompatActivity() {
         mNfcAdapter.disableForegroundDispatch(this)
     }
 
-    @SuppressLint("ShowToast")
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
         // NFCのEXTRA_IDを読み込み表示する
         val uid: ByteArray = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID) ?: run {
-            Toast.makeText(this, "Failed to read NFC", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "Failed to read NFC", Toast.LENGTH_SHORT).show()
             return
         }
         Toast.makeText(this, Arrays.toString(uid), Toast.LENGTH_SHORT).show()

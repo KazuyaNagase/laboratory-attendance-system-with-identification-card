@@ -38,7 +38,6 @@ class RoomConfirmationActivity : AppCompatActivity() {
             }
         }
         val idm: ByteArray = intent.getByteArrayExtra("idm")
-        //Toast.makeText(this,Arrays.toString(idm),Toast.LENGTH_SHORT).show()
         val student = realm.where<Student>().contains("idm", Arrays.toString(idm)).findFirst()
 
         val cal = Calendar.getInstance()
@@ -47,52 +46,33 @@ class RoomConfirmationActivity : AppCompatActivity() {
         var day = cal.get(Calendar.DAY_OF_WEEK)
         when (day) {
             1 -> {
-                day = day + 5
+                day+=5
             }
             2, 3, 4, 5, 6, 7 -> {
-                day = day - 2
+                day-=2
             }
         }
-
-        //val student: Student? = scanStudent
-        val lab: String? = student?.lab?.labName
-        val name: String? = student?.name
-        val studentId: String? = student?.studentId
 
         val startCoreTime: Calendar = Calendar.getInstance()
         startCoreTime.time = student?.lab?.coreTimeArray?.get(day)?.startCoreTime ?: startCoreTime.time
         val startCoreHour: Int = startCoreTime.get(Calendar.HOUR_OF_DAY)
         val startCoreMinute: Int = startCoreTime.get(Calendar.MINUTE)
-
-
         val endCoreTime: Calendar = Calendar.getInstance()
         endCoreTime.time = student?.lab?.coreTimeArray?.get(day)?.endCoreTime
         val endCoreHour: Int = endCoreTime.get(Calendar.HOUR_OF_DAY)
         val endCoreMinute: Int = endCoreTime.get(Calendar.MINUTE)
-
-        //val endcoreTime = student?.lab?.coreTimeArray?.get(day)?.endcoreTime
-        //  DateFormat("EEE MMM dd mm;ss;xx )
-
-        //Toast.makeText(this, startCoreTime.time.toString(), Toast.LENGTH_SHORT).show()
-        // Toast.makeText(this, coreTime.toString(), Toast.LENGTH_SHORT).show()
-
-
-        //Toast.makeText(this, day.toString(), Toast.LENGTH_SHORT).show()
-
         val lab_view: TextView = findViewById(R.id.lab)
         val name_view: TextView = findViewById(R.id.name)
         val studentId_view: TextView = findViewById(R.id.studentId)
         val currentTime_view: TextView = findViewById(R.id.currentTime)
         val startcoreTime_view: TextView = findViewById(R.id.coretime_start)
         val endcoreTime_view: TextView = findViewById(R.id.coretime_end)
-        lab_view.text = lab.toString()
-        name_view.text = name.toString()
-        studentId_view.text = studentId.toString()
+        lab_view.text = student?.lab?.labName.toString()
+        name_view.text = student?.name.toString()
+        studentId_view.text = student?.studentId.toString()
         startcoreTime_view.text = String.format("%02d", startCoreHour) + ":" + String.format("%02d", startCoreMinute)
         endcoreTime_view.text = String.format("%02d", endCoreHour) + ":" + String.format("%02d", endCoreMinute)
-        currentTime_view.text = hour.toString() + ":" + minutes.toString()
-        //textView.text = scanStudent.toString()
-        Toast.makeText(this, endCoreHour.toString(), Toast.LENGTH_SHORT).show()
+        currentTime_view.text = String.format("%02d", hour) + ":" + String.format("%02d", minutes)
     }
 
     //画面がタッチされるとMainActivityに遷移する

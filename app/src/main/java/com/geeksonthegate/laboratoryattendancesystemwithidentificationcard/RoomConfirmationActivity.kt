@@ -15,6 +15,7 @@ import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.model
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_scan_studentcard.*
 import java.util.*
 
 class RoomConfirmationActivity : AppCompatActivity() {
@@ -29,9 +30,11 @@ class RoomConfirmationActivity : AppCompatActivity() {
         when (id) {
             getString(R.string.enter) -> {
                 setTitle(R.string.enter)
+                background.setImageResource(R.drawable.bg_enter_confirmation)
             }
             getString(R.string.exit) -> {
                 setTitle(R.string.exit)
+                background.setImageResource(R.drawable.bg_exit_confirmation)
             }
         }
         val idm: ByteArray = intent.getByteArrayExtra("idm")

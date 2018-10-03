@@ -46,10 +46,10 @@ class RoomConfirmationActivity : AppCompatActivity() {
         var day = cal.get(Calendar.DAY_OF_WEEK)
         when (day) {
             1 -> {
-                day+=5
+                day += 5
             }
             2, 3, 4, 5, 6, 7 -> {
-                day-=2
+                day -= 2
             }
         }
 

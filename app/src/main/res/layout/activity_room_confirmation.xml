@@ -9,15 +9,13 @@
     <ImageView
         android:id="@+id/background"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:contentDescription="@string/background"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_enter_confirmation" />
 
 
@@ -27,14 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="8dp"
         android:text="@string/lab_label"
         android:textColor="@color/colorAccent"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027"
+        app:layout_constraintVertical_bias="0.069"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -55,14 +52,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="8dp"
         android:text="@string/name_label"
         android:textColor="@color/colorAccent"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/lab_label"
+        app:layout_constraintVertical_bias="0.089"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -83,14 +80,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="8dp"
         android:text="@string/studentId_label"
         android:textColor="@color/colorAccent"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/name_label"
+        app:layout_constraintVertical_bias="0.014"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -111,14 +108,14 @@
         android:layout_height="15dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="8dp"
         android:text="@string/coretime_label"
         android:textColor="@color/colorAccent"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/studentId_label"
+        app:layout_constraintVertical_bias="0.142"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -133,56 +130,62 @@
         android:textSize="27dp"
         app:layout_constraintBottom_toBottomOf="@+id/coretime_start"
         app:layout_constraintEnd_toStartOf="@+id/coretime_end"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/coretime_start" />
+        app:layout_constraintTop_toTopOf="@+id/coretime_start"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/access_time_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="336dp"
+        android:layout_marginTop="8dp"
         android:text="@string/access_time_label"
         android:textColor="@color/colorAccent"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/coretime_label"
+        app:layout_constraintVertical_bias="0.329"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/currentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="@+id/access_time_label"
-        app:layout_constraintTop_toTopOf="@+id/access_time_label" />
+        app:layout_constraintTop_toTopOf="@+id/access_time_label"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/confirmaiton_label_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
         android:text="@string/confirmation_label_1"
         android:textColor="@color/colorAccent"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/currentTime"
+        app:layout_constraintVertical_bias="0.078"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -190,14 +193,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="512dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="8dp"
         android:text="@string/confirmation_label_2"
         android:textColor="@color/colorAccent"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmaiton_label_1"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
@@ -206,7 +209,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="12dp"
         android:text="@string/coretime_start"
         android:textColor="@color/colorAccent"
         android:textSize="27dp"
@@ -223,6 +225,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="27dp"
         app:layout_constraintBottom_toBottomOf="@+id/start_end_label"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/start_end_label"

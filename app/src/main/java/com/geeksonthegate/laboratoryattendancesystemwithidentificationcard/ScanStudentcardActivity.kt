@@ -1,17 +1,19 @@
 package com.geeksonthegate.laboratoryattendancesystemwithidentificationcard
 
+import android.app.AlertDialog
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import io.realm.Realm
 import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.model.Student
-import io.realm.kotlin.where
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_scan_studentcard.*
 import java.util.*
 
+
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class ScanStudentcardActivity : AppCompatActivity() {
 
     private lateinit var realm: Realm
@@ -24,7 +26,7 @@ class ScanStudentcardActivity : AppCompatActivity() {
     /**
      * 前画面で押されたボタンのIDを格納するプロパティ
      */
-    // TODO: 宣言位置の再考
+    // TODO: ここでidを宣言するか再考の余地あり
     var id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +81,7 @@ class ScanStudentcardActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        // TODO: 初期値の再考
+        // 初期値として遷移先をメイン画面に設定
         var nextIntent = Intent(this, MainActivity::class.java)
 
         // NFCのEXTRA_IDを読み込み、前画面で押されたボタンと共に表示する
@@ -88,28 +90,123 @@ class ScanStudentcardActivity : AppCompatActivity() {
             return
         }
 
-        // タイトルによって次に飛ぶActivityを選択する
-        when (id) {
-            R.id.enter -> {
-                nextIntent = Intent(this, RoomConfirmationActivity::class.java)
-            }
-            R.id.exit -> {
-                nextIntent = Intent(this, RoomConfirmationActivity::class.java)
-            }
-            R.id.register -> {
-                nextIntent = Intent(this, StudentSettingActivity::class.java)
-            }
-            R.id.edit -> {
-                nextIntent = Intent(this, StudentSettingActivity::class.java)
-            }
-        }
         nextIntent.putExtra("scan_label", title)
         nextIntent.putExtra("idm", idm)
-        startActivity(nextIntent)
+
+        when (id) {
+            R.id.enter -> {
+                when {
+                    // 登録済みの学生の場合には確認画面に遷移する
+                    isRegisteredCard(idm) -> {
+                        nextIntent = Intent(this, RoomConfirmationActivity::class.java)
+                        nextIntent.putExtra("scan_label", title)
+                        nextIntent.putExtra("idm", idm)
+                        startActivity(nextIntent)
+                    }
+                    // 未登録の学生の場合にはモーダルを表示し、メインに遷移
+                    !isRegisteredCard(idm) -> {
+                        unknownResistedCardModal(nextIntent)
+                    }
+                }
+            }
+
+            R.id.exit -> {
+                when {
+                    // 登録済みの学生の場合には確認画面に遷移する
+                    isRegisteredCard(idm) -> {
+                        nextIntent = Intent(this, RoomConfirmationActivity::class.java)
+                        nextIntent.putExtra("scan_label", title)
+                        nextIntent.putExtra("idm", idm)
+                        startActivity(nextIntent)
+                    }
+                    // 未登録の学生の場合にはモーダルを表示し、メインに遷移
+                    !isRegisteredCard(idm) -> {
+                        unknownResistedCardModal(nextIntent)
+                    }
+                }
+            }
+
+            R.id.register -> {
+                when {
+                    // 登録済みの学生の場合には、モーダルを表示してメインに遷移
+                    isRegisteredCard(idm) -> {
+                        existCardModal(nextIntent)
+                    }
+                    // 未登録の学生の場合には登録画面に遷移
+                    !isRegisteredCard(idm) -> {
+                        nextIntent = Intent(this, StudentSettingActivity::class.java)
+                        nextIntent.putExtra("scan_label", title)
+                        nextIntent.putExtra("idm", idm)
+                        startActivity(nextIntent)
+                    }
+                }
+            }
+
+            R.id.edit -> {
+                when {
+                    // 登録済みの学生の場合には編集画面に遷移する
+                    isRegisteredCard(idm) -> {
+                        nextIntent = Intent(this, StudentSettingActivity::class.java)
+                        nextIntent.putExtra("scan_label", title)
+                        nextIntent.putExtra("idm", idm)
+                        startActivity(nextIntent)
+                    }
+                    // 未登録の学生の場合にはメインに遷移し, モーダルを表示
+                    !isRegisteredCard(idm) -> {
+                        unknownResistedCardModal(nextIntent)
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
+    }
+
+    /*登録済みの学生証かどうかを判断する
+    * 登録済みなら true _ 未登録ならfalseを返す*/
+    private fun isRegisteredCard(idm: ByteArray): Boolean {
+        return when {
+            realm.where(Student::class.java).equalTo("idm", Arrays.toString(idm)).findFirst() == null -> false
+            else -> true
+        }
+    }
+
+    /*
+    スキャンされたカードが未登録の場合に表示するモーダル
+    入室・退室・登録に未登録カードがスキャンされた場合に表示
+    */
+    private fun unknownResistedCardModal(nextIntent: Intent) {
+        setContentView(R.layout.activity_scan_studentcard)
+        AlertDialog.Builder(this).apply {
+            setCancelable(false)
+            setTitle("この学生証は未登録です")
+            setMessage("トップから登録ボタンをタップして\n学生情報を登録してください")
+            setPositiveButton("OK", { _, _ ->
+                // OKがタップされたらMain画面に遷移
+                startActivity(nextIntent)
+            })
+            show()
+        }
+    }
+
+    /*
+    スキャンされたカードが登録済みの場合に表示するモーダル
+    登録にすでに登録ずみカードがスキャンされたときに表示
+    */
+    private fun existCardModal(nextIntent: Intent) {
+
+        setContentView(R.layout.activity_scan_studentcard)
+        AlertDialog.Builder(this).apply {
+            setCancelable(false)
+            setTitle("この学生証は登録済みです")
+            setPositiveButton("OK", { _, _ ->
+                // OKがタップされたらMain画面に遷移
+                startActivity(nextIntent)
+            })
+            show()
+        }
     }
 }

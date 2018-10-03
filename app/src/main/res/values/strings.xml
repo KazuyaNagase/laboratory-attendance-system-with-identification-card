@@ -13,7 +13,7 @@
     <string name="exit_button">exit_button</string>
     <string name="background">background</string>
     <string name="lab_label">所属</string>
-    <string name="lab_hint">所属を選択してください</string>
+    <string name="lab_hint">所属を入力してください</string>
     <string name="name_hint">氏名を入力してください</string>
     <string name="name_label">氏名</string>
     <string name="studentId_label">学籍番号</string>

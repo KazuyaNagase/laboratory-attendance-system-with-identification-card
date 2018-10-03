@@ -52,11 +52,8 @@ class StudentSettingActivity : AppCompatActivity() {
         var student: Student? = realm.where(Student::class.java).equalTo("idm", Arrays.toString(idm)).findFirst()
 
         // コアタイム一覧を生成するメソッドに渡す一覧を生成・初期化
-/*<<<<<<< HEAD
-        val coretimeList = mutableListOf<CoreTime>()
-=======*/
+
         var coreTimeList = mutableListOf<CoreTime>()
-//>>>>>>> master
         for (i in 0..6) {
             coreTimeList.add(CoreTime(
                     GregorianCalendar(
@@ -70,11 +67,6 @@ class StudentSettingActivity : AppCompatActivity() {
         // TODO: スピナー内の文字をデザインに合わせる
         val results = realm.where(Lab::class.java).findAll()
         val labList = mutableListOf<Lab>()
-/*<<<<<<< HEAD
-        // TODO: ダミーデータを消したら「新規」選択肢は最後に回すこと
-        labList.add(Lab("新規", listToRealmList(coretimeList)))
-=======*/
-//>>>>>>> master
         labList.addAll(results.subList(0, results.size))
         labList.add(Lab(labName = "新規", coreTimeArray = listToRealmList(coreTimeList)))
         // スピナーの初期位置を所属研究室に合わせる（新規登録の場合は新規研究室）
@@ -105,17 +97,10 @@ class StudentSettingActivity : AppCompatActivity() {
 
         // 前画面から受け取ったラベルを基に処理分岐
         when (scanLabel) {
-/*<<<<<<< HEAD
-            getString(R.string.register) -> setCoreTimeArea(coretimeList)
-
-            getString(R.string.edit) -> {
-                setCoreTimeArea(student?.lab?.coreTimeArray ?: coretimeList)
-=======*/
             getString(R.string.register) -> setCoreTimeArea(coreTimeList, scanLabel, idm)
 
             getString(R.string.edit) -> {
                 setCoreTimeArea(student?.lab?.coreTimeArray ?: coreTimeList, scanLabel, idm)
-//>>>>>>> master
                 name_entry.setText(student?.name)
                 studentid_entry.setText(student?.studentId)
             }
@@ -124,11 +109,6 @@ class StudentSettingActivity : AppCompatActivity() {
         // 登録ボタンが押されたら画面情報を基にStudentデータを登録
         // 研究室名が「新規」の場合は登録を拒否し研究室入力を促す
         user_register_button.setOnClickListener {
-            /*<<<<<<< HEAD
-                        student = Student(Arrays.toString(idm), studentid_entry.text.toString(), name_entry.text.toString(), Lab(labName = "福田研究室", coreTimeArray = listToRealmList(coretimeList)))
-                        realm.executeTransaction { it.insertOrUpdate(student) }
-                        startActivity(intent)
-            =======*/
             val selectedLab = lab_spinner.selectedItem as Lab
             if (selectedLab.labName != "新規") {
                 student = Student(Arrays.toString(idm), studentid_entry.text.toString(), name_entry.text.toString(), selectedLab)
@@ -137,7 +117,6 @@ class StudentSettingActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "研究室登録をしてください", Toast.LENGTH_SHORT).show()
             }
-//>>>>>>> master
         }
     }
 
@@ -147,9 +126,6 @@ class StudentSettingActivity : AppCompatActivity() {
     }
 
     // コアタイム一覧を受け取りレイアウト内に一覧を表示するメソッド
-/*<<<<<<< HEAD
-    private fun setCoreTimeArea(coretimeList: List<CoreTime>) {
-=======*/
     private fun setCoreTimeArea(coreTimeList: List<CoreTime>, scanLabel: String, idm: ByteArray) {
         val sendLab = lab_spinner.selectedItem as Lab
         val nextIntent = Intent(this, LabSettingActivity::class.java)
@@ -157,8 +133,6 @@ class StudentSettingActivity : AppCompatActivity() {
         nextIntent.putExtra("lab_id", sendLab.labId)
         nextIntent.putExtra("scan_label", scanLabel)
         nextIntent.putExtra("idm", idm)
-
-//>>>>>>> master
         for (i in 0..6) {
             startCoreTimeLabelList[i].text = DateFormat.format("kk:mm", coreTimeList[i].startCoreTime)
             endCoreTimeLabelList[i].text = DateFormat.format("kk:mm", coreTimeList[i].endCoreTime)

@@ -5,23 +5,21 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.KeyEvent
 import android.view.MotionEvent
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.R.id.*
-import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.model.Lab
 import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.model.Student
 import io.realm.Realm
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_scan_studentcard.*
 import java.util.*
 import java.lang.Runnable
 import java.text.SimpleDateFormat
 
+
 class RoomConfirmationActivity : AppCompatActivity() {
     private lateinit var realm: Realm
+    private val handler = Handler()
     @SuppressLint("ResourceType")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,29 +69,37 @@ class RoomConfirmationActivity : AppCompatActivity() {
         startcoreTime_view.text = sdf.format(startCoreTime.getTime())
         endcoreTime_view.text = sdf.format(endCoreTime.getTime())
         currentTime_view.text = sdf.format(currentTime.getTime())
-
-        //登録確認画面から3秒後にMainActivityに遷移する
-        Handler().postDelayed(Runnable {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
+        //登録確認画面から3秒後にMainActivityに遷移
+        handler.postDelayed(Runnable {
+            moveToMainActivity()
         }, 3000)
     }
 
-    //画面がタッチされるとMainActivityに遷移する
+    //画面がタッチされるとMainActivityに遷移
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_DOWN) {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
+            moveToMainActivity()
         }
         return true
+    }
+
+    //端末のBackボタンを押すとMainActivityに遷移
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveToMainActivity()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
+    }
+
+    private fun moveToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
     }
 }

@@ -71,7 +71,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="27dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lab_label"
+        app:layout_constraintTop_toBottomOf="@+id/name_label"
         tools:ignore="MissingConstraints" />
 
     <TextView

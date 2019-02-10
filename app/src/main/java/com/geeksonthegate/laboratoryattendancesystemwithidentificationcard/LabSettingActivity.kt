@@ -65,8 +65,8 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         val labId = intent.getStringExtra("lab_id")
         realm = Realm.getDefaultInstance()
         val lab = realm.where(Lab::class.java).equalTo("labId", labId).findFirst()
-                ?: Lab(labName = "新規", coretimeArray = coreTimeList)
-        coreTimeList = lab.coretimeArray ?: coreTimeList
+                ?: Lab(labName = "新規", coreTimeArray = coreTimeList)
+        coreTimeList = lab.coreTimeArray ?: coreTimeList
 
         // 取得もしくは生成した研究室情報から画面描画・リスナにクリック・表示内容変更イベントを登録
         // TODO: 時刻設定のValidationが編集中にも適用されてしまう 編集が終わってから検証するようにする
@@ -123,12 +123,12 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
                         val cal = Calendar.getInstance()
                         cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
                         cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                        lab.coretimeArray!![i]!!.startCoreTime = cal.time
+                        lab.coreTimeArray!![i]!!.startCoreTime = cal.time
                         hourAndMinute = endCoreTimeLabelList[i].text.split(":")
                         cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
                         cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                        lab.coretimeArray!![i]!!.endCoreTime = cal.time
-                        lab.coretimeArray!![i]!!.isCoreDay = isCoreDayBoxList[i].isChecked
+                        lab.coreTimeArray!![i]!!.endCoreTime = cal.time
+                        lab.coreTimeArray!![i]!!.isCoreDay = isCoreDayBoxList[i].isChecked
                     }
                     it.insertOrUpdate(lab)
                 }

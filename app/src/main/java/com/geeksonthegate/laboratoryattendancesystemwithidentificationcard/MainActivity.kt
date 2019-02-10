@@ -21,9 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         realm = Realm.getDefaultInstance()
-
-        // TODO: 学生・研究室情報登録が完璧になったらこのダミーデータは削除する
 /*
+        // TODO: 学生・研究室情報登録が完璧になったらこのダミーデータは削除する
         // 以降、テスト用ダミーデータの登録
         // 研究室
         val coreTimeArrayF = RealmList<CoreTime>()
@@ -50,12 +49,13 @@ class MainActivity : AppCompatActivity() {
             coreTimeArrayH.add(CoreTime(GregorianCalendar(2000, 0, 1, 11, 0).time,
                     GregorianCalendar(2000, 0, 1, 19, 0).time, false))
         }
+
         val labArray = mutableListOf<Lab>()
         try {
-            labArray.add(Lab(labName = "福田研究室", coretimeArray = coreTimeArrayF))
-            labArray.add(Lab(labName = "菅谷研究室", coretimeArray = coreTimeArrayS))
-            labArray.add(Lab(labName = "宇佐美研究室", coretimeArray = coreTimeArrayU))
-            labArray.add(Lab(labName = "平川研究室", coretimeArray = coreTimeArrayH))
+            labArray.add(Lab(labName = "福田研究室", coreTimeArray = coreTimeArrayF))
+            labArray.add(Lab(labName = "菅谷研究室", coreTimeArray = coreTimeArrayS))
+            labArray.add(Lab(labName = "宇佐美研究室", coreTimeArray = coreTimeArrayU))
+            labArray.add(Lab(labName = "平川研究室", coreTimeArray = coreTimeArrayH))
         } catch (exception: Exception) {
             Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
         } finally {
@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity() {
         // 学生
         val studentArray = mutableListOf<Student>()
         try {
-            studentArray.add(Student(listOf<Byte>(1, 16, 14, 0, 60, 20, -31, 0).toString(), "AL15026", "岸本太郎", Lab(labName = "菅谷研究室", coretimeArray = coretimeArray)))
-            studentArray.add(Student(listOf<Byte>(1, 16, 8, 0, 60, 20, -99, 1).toString(), "AL15082", "迫真古川先輩", Lab(labName = "平川研究室", coretimeArray = coretimeArray)))
+            studentArray.add(Student(listOf<Byte>(1, 16, 14, 0, 60, 20, -31, 0).toString(), "AL15026", "岸本太郎", Lab(labName = "菅谷研究室", coreTimeArray = coreTimeArrayS)))
+            studentArray.add(Student(listOf<Byte>(1, 16, 8, 0, 60, 20, -99, 1).toString(), "AL15082", "迫真古川先輩", Lab(labName = "平川研究室", coreTimeArray = coreTimeArrayH)))
         } catch (exception: Exception) {
             Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
         } finally {

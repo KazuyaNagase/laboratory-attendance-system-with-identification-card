@@ -52,6 +52,7 @@ class StudentSettingActivity : AppCompatActivity() {
         var student: Student? = realm.where(Student::class.java).equalTo("idm", Arrays.toString(idm)).findFirst()
 
         // コアタイム一覧を生成するメソッドに渡す一覧を生成・初期化
+
         var coreTimeList = mutableListOf<CoreTime>()
         for (i in 0..6) {
             coreTimeList.add(CoreTime(
@@ -67,7 +68,7 @@ class StudentSettingActivity : AppCompatActivity() {
         val results = realm.where(Lab::class.java).findAll()
         val labList = mutableListOf<Lab>()
         labList.addAll(results.subList(0, results.size))
-        labList.add(Lab(labName = "新規", coretimeArray = listToRealmList(coreTimeList)))
+        labList.add(Lab(labName = "新規", coreTimeArray = listToRealmList(coreTimeList)))
         // スピナーの初期位置を所属研究室に合わせる（新規登録の場合は新規研究室）
         var defaultPosition: Int = labList.size - 1
         for (i in 0 until labList.size) {
@@ -87,7 +88,7 @@ class StudentSettingActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val spinner = parent as Spinner
                 val item = spinner.selectedItem as Lab
-                coreTimeList = item.coretimeArray ?: coreTimeList
+                coreTimeList = item.coreTimeArray ?: coreTimeList
                 setCoreTimeArea(coreTimeList, scanLabel, idm)
             }
 
@@ -99,7 +100,7 @@ class StudentSettingActivity : AppCompatActivity() {
             getString(R.string.register) -> setCoreTimeArea(coreTimeList, scanLabel, idm)
 
             getString(R.string.edit) -> {
-                setCoreTimeArea(student?.lab?.coretimeArray ?: coreTimeList, scanLabel, idm)
+                setCoreTimeArea(student?.lab?.coreTimeArray ?: coreTimeList, scanLabel, idm)
                 name_entry.setText(student?.name)
                 studentid_entry.setText(student?.studentId)
             }
@@ -132,7 +133,6 @@ class StudentSettingActivity : AppCompatActivity() {
         nextIntent.putExtra("lab_id", sendLab.labId)
         nextIntent.putExtra("scan_label", scanLabel)
         nextIntent.putExtra("idm", idm)
-
         for (i in 0..6) {
             startCoreTimeLabelList[i].text = DateFormat.format("kk:mm", coreTimeList[i].startCoreTime)
             endCoreTimeLabelList[i].text = DateFormat.format("kk:mm", coreTimeList[i].endCoreTime)

@@ -96,14 +96,14 @@ class ScanStudentcardActivity : AppCompatActivity() {
         when (id) {
             R.id.enter -> {
                 when {
-                // 登録済みの学生の場合には確認画面に遷移する
+                    // 登録済みの学生の場合には確認画面に遷移する
                     isRegisteredCard(idm) -> {
                         nextIntent = Intent(this, RoomConfirmationActivity::class.java)
                         nextIntent.putExtra("scan_label", title)
                         nextIntent.putExtra("idm", idm)
                         startActivity(nextIntent)
                     }
-                // 未登録の学生の場合にはモーダルを表示し、メインに遷移
+                    // 未登録の学生の場合にはモーダルを表示し、メインに遷移
                     !isRegisteredCard(idm) -> {
                         unknownResistedCardModal(nextIntent)
                     }
@@ -112,14 +112,14 @@ class ScanStudentcardActivity : AppCompatActivity() {
 
             R.id.exit -> {
                 when {
-                // 登録済みの学生の場合には確認画面に遷移する
+                    // 登録済みの学生の場合には確認画面に遷移する
                     isRegisteredCard(idm) -> {
                         nextIntent = Intent(this, RoomConfirmationActivity::class.java)
                         nextIntent.putExtra("scan_label", title)
                         nextIntent.putExtra("idm", idm)
                         startActivity(nextIntent)
                     }
-                // 未登録の学生の場合にはモーダルを表示し、メインに遷移
+                    // 未登録の学生の場合にはモーダルを表示し、メインに遷移
                     !isRegisteredCard(idm) -> {
                         unknownResistedCardModal(nextIntent)
                     }
@@ -128,11 +128,11 @@ class ScanStudentcardActivity : AppCompatActivity() {
 
             R.id.register -> {
                 when {
-                // 登録済みの学生の場合には、モーダルを表示してメインに遷移
+                    // 登録済みの学生の場合には、モーダルを表示してメインに遷移
                     isRegisteredCard(idm) -> {
                         existCardModal(nextIntent)
                     }
-                // 未登録の学生の場合には登録画面に遷移
+                    // 未登録の学生の場合には登録画面に遷移
                     !isRegisteredCard(idm) -> {
                         nextIntent = Intent(this, StudentSettingActivity::class.java)
                         nextIntent.putExtra("scan_label", title)
@@ -144,14 +144,14 @@ class ScanStudentcardActivity : AppCompatActivity() {
 
             R.id.edit -> {
                 when {
-                // 登録済みの学生の場合には編集画面に遷移する
+                    // 登録済みの学生の場合には編集画面に遷移する
                     isRegisteredCard(idm) -> {
                         nextIntent = Intent(this, StudentSettingActivity::class.java)
                         nextIntent.putExtra("scan_label", title)
                         nextIntent.putExtra("idm", idm)
                         startActivity(nextIntent)
                     }
-                // 未登録の学生の場合にはメインに遷移し, モーダルを表示
+                    // 未登録の学生の場合にはメインに遷移し, モーダルを表示
                     !isRegisteredCard(idm) -> {
                         unknownResistedCardModal(nextIntent)
                     }

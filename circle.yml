@@ -6,6 +6,11 @@ jobs:
       - image: circleci/android:api-26-alpha
     environment:
       JVM_OPTS: -Xmx3200m
+      ANDROID_HOME: /Users/kazuyanagase/Library/Android/sdk
+    dependencies:
+      pre:
+        - mkdir $ANDROID_HOME/licenses
+        - cat android-sdk-license > $ANDROID_HOME/licenses/android-sdk-license
     steps:
       - checkout
       - restore_cache:

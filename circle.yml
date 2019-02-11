@@ -6,7 +6,6 @@ jobs:
       - image: circleci/android:api-26-alpha
     environment:
       JVM_OPTS: -Xmx3200m
-      ANDROID_HOME: /opt/android
     dependencies:
       pre:
         - mkdir $ANDROID_HOME/licenses

@@ -13,9 +13,10 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: licenses checke
-          command: rm android-sdk-license && echo "
+          command: echo "
             d56f5187479451eabf01fb78af6dfcb131a6481e
-            24333f8a63b6825ea9c5514f83c2829b004d1fee" >> $ANDROID_HOME/licenses/android-sdk-license && cat $ANDROID_HOME/licenses/android-sdk-license
+            24333f8a63b6825ea9c5514f83c2829b004d1fee" >> $ANDROID_HOME/licenses/android-sdk-license &&
+            cat $ANDROID_HOME/licenses/android-sdk-license
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew

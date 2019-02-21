@@ -8,27 +8,27 @@
 
     <ImageView
         android:id="@+id/background"
-        android:layout_width="0sp"
-        android:layout_height="0sp"
+        android:layout_width="474dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="false"
         android:contentDescription="@string/background"
         android:cropToPadding="false"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bg_form" />
 
     <TextView
         android:id="@+id/lab_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="5sp"
+        android:layout_marginStart="28sp"
         android:layout_marginBottom="8sp"
         android:text="@string/lab_label"
         android:textColor="@color/colorAccent"
@@ -37,141 +37,188 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28sp"
+        android:layout_marginBottom="8sp"
+        android:text="@string/name_label"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lab_spinner"
         app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/studentId_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28sp"
+        android:text="@string/studentId_label"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_entry"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/coretime_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="8sp"
+        android:layout_marginStart="28sp"
         android:text="@string/coretime_label"
         android:textColor="@color/colorAccent"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lab_name"
+        app:layout_constraintTop_toBottomOf="@+id/studentid_entry"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/sunday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/sunday_coretime_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/sunday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/sunday_coretime_start"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/saturday_coretime_start"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/saturday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/saturday_coretime_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/saturday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/saturday_coretime_start"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/friday_coretime_start"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/friday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/friday_coretime_start"
         app:layout_constraintStart_toEndOf="@+id/friday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/friday_coretime_start"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/thursday_coretime_start"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/thursday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/thursday_coretime_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/thursday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/thursday_coretime_start"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/wednesday_coretime_start"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/wednesday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/wednesday_coretime_start"
         app:layout_constraintStart_toEndOf="@+id/wednesday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/wednesday_coretime_start"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/tuesday_coretime_start"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tuesday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="24sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tuesday_coretime_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tuesday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/tuesday_coretime_start" />
+        app:layout_constraintTop_toBottomOf="@+id/monday_coretime_start"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/monday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="24sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/monday_coretime_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/monday_coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/monday_coretime_start" />
+        app:layout_constraintTop_toTopOf="@+id/monday_coretime_start"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/suday_start_end_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20sp"
+        android:layout_marginTop="8sp"
         android:text="@string/start_end"
         android:textColor="@color/colorAccent"
         android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="@+id/coretime_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/coretime_start" />
+        app:layout_constraintTop_toTopOf="@+id/coretime_start"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/core_time_custom_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="12sp"
+        android:layout_marginStart="28dp"
         android:text="@string/core_time_custom_label"
         android:textColor="@color/colorAccent"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coretime_start"
+        app:layout_constraintVertical_bias="0.018"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8sp"
+        android:layout_marginStart="28sp"
         android:text="@string/coretime_start"
         android:textColor="@color/colorAccent"
         android:textSize="27sp"
@@ -182,26 +229,27 @@
     <TextView
         android:id="@+id/coretime_end"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20sp"
+        android:layout_height="39sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginTop="8sp"
         android:text="@string/coretime_end"
         android:textColor="@color/colorAccent"
         android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="@+id/suday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/suday_start_end_label"
         app:layout_constraintTop_toTopOf="@+id/suday_start_end_label"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.8"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/monday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12sp"
+        android:layout_marginStart="8dp"
         android:text="@string/monday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/core_time_custom_label"
         tools:ignore="MissingConstraints" />
 
@@ -209,11 +257,10 @@
         android:id="@+id/tuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
         android:text="@string/tuesday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/monday"
         app:layout_constraintTop_toBottomOf="@+id/monday"
         tools:ignore="MissingConstraints" />
 
@@ -221,11 +268,10 @@
         android:id="@+id/wednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
         android:text="@string/wednesday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tuesday"
         app:layout_constraintTop_toBottomOf="@+id/tuesday"
         tools:ignore="MissingConstraints" />
 
@@ -233,11 +279,10 @@
         android:id="@+id/thursday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
         android:text="@string/thursday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/wednesday"
         app:layout_constraintTop_toBottomOf="@+id/wednesday"
         tools:ignore="MissingConstraints" />
 
@@ -245,11 +290,10 @@
         android:id="@+id/friday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
         android:text="@string/friday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/thursday"
         app:layout_constraintTop_toBottomOf="@+id/thursday"
         tools:ignore="MissingConstraints" />
 
@@ -257,11 +301,10 @@
         android:id="@+id/saturday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
         android:text="@string/saturday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/friday"
         app:layout_constraintTop_toBottomOf="@+id/friday"
         tools:ignore="MissingConstraints" />
 
@@ -269,11 +312,10 @@
         android:id="@+id/sunday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
         android:text="@string/sunday"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="@+id/core_time_custom_label"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/saturday"
         app:layout_constraintTop_toBottomOf="@+id/saturday"
         tools:ignore="MissingConstraints" />
 
@@ -281,188 +323,218 @@
         android:id="@+id/sunday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="24sp"
         android:text="@string/sunday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/sunday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/sunday_start_end_label"
-        app:layout_constraintTop_toTopOf="@+id/sunday_start_end_label"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/saturday_start_end_label"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/saturday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
         android:text="@string/saturday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/saturday_start_end_label"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/sunday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/saturday_start_end_label"
         app:layout_constraintTop_toTopOf="@+id/saturday_start_end_label"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/friday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/friday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/friday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/friday_start_end_label"
-        app:layout_constraintTop_toTopOf="@+id/friday_start_end_label"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/thursday_start_end_label"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/thursday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/thursday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/thursday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/thursday_start_end_label"
-        app:layout_constraintTop_toTopOf="@+id/thursday_start_end_label"
+        app:layout_constraintTop_toBottomOf="@+id/wednesday_start_end_label"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/wednesday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/wednesday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/wednesday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/wednesday_start_end_label"
         app:layout_constraintTop_toTopOf="@+id/wednesday_start_end_label"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tuesday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/tuesday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tuesday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/tuesday_start_end_label"
-        app:layout_constraintTop_toTopOf="@+id/tuesday_start_end_label"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/monday_start_end_label"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/monday_coretime_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24sp"
+        android:layout_marginTop="8sp"
         android:text="@string/monday_coretime_end"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/monday_start_end_label"
         app:layout_constraintStart_toEndOf="@+id/monday_start_end_label"
         app:layout_constraintTop_toTopOf="@+id/monday_start_end_label"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/sunday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12sp"
         android:text="@string/sunday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sunday"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/sunday"
-        app:layout_constraintTop_toTopOf="@+id/sunday"
+        app:layout_constraintTop_toBottomOf="@+id/saturday_coretime_start"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/saturday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="12sp"
         android:text="@string/saturday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/saturday"
         app:layout_constraintStart_toEndOf="@+id/saturday"
         app:layout_constraintTop_toTopOf="@+id/saturday"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/friday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12sp"
         android:text="@string/friday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/friday"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/saturday"
         app:layout_constraintStart_toEndOf="@+id/friday"
         app:layout_constraintTop_toTopOf="@+id/friday"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/thursday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12sp"
         android:text="@string/thursday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/thursday"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/friday"
         app:layout_constraintStart_toEndOf="@+id/thursday"
         app:layout_constraintTop_toTopOf="@+id/thursday"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/wednesday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="12sp"
         android:text="@string/wednesday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/wednesday"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/thursday"
         app:layout_constraintStart_toEndOf="@+id/wednesday"
         app:layout_constraintTop_toTopOf="@+id/wednesday"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tuesday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="12sp"
         android:text="@string/tuesday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tuesday"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/wednesday"
         app:layout_constraintStart_toEndOf="@+id/tuesday"
         app:layout_constraintTop_toTopOf="@+id/tuesday"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/monday_coretime_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginStart="12sp"
         android:text="@string/monday_coretime_start"
         android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/monday"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tuesday"
         app:layout_constraintStart_toEndOf="@+id/monday"
         app:layout_constraintTop_toTopOf="@+id/monday"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/lab_register_button"
+        android:id="@+id/user_register_button"
         android:layout_width="121sp"
         android:layout_height="38sp"
         android:layout_margin="16sp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="@drawable/user_register"
         android:contentDescription="@string/register"
         android:elevation="16sp"
         android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sunday_coretime_end" />
@@ -471,89 +543,115 @@
         android:id="@+id/monday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/monday_coretime_end"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/monday_coretime_end" />
+        app:layout_constraintStart_toEndOf="@+id/monday_coretime_end"
+        app:layout_constraintTop_toTopOf="@+id/monday_coretime_end"
+        app:layout_constraintVertical_bias="0.692" />
 
     <CheckBox
         android:id="@+id/tuesday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/tuesday_coretime_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tuesday_coretime_end" />
+        app:layout_constraintStart_toEndOf="@+id/tuesday_coretime_end"
+        app:layout_constraintTop_toBottomOf="@+id/monday_coretime_end" />
 
     <CheckBox
         android:id="@+id/wednesday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
+        android:layout_marginStart="8sp"
+        android:text="@string/checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/wednesday_coretime_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/wednesday_coretime_end" />
+        app:layout_constraintStart_toEndOf="@+id/wednesday_coretime_end"
+        app:layout_constraintTop_toBottomOf="@+id/tuesday_coretime_end"
+        app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
         android:id="@+id/thursday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/thursday_coretime_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/thursday_coretime_end" />
+        app:layout_constraintStart_toEndOf="@+id/thursday_coretime_end"
+        app:layout_constraintTop_toBottomOf="@+id/wednesday_coretime_end" />
 
     <CheckBox
         android:id="@+id/friday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/friday_coretime_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/friday_coretime_end" />
+        app:layout_constraintStart_toEndOf="@+id/friday_coretime_end"
+        app:layout_constraintTop_toBottomOf="@+id/thursday_coretime_end" />
 
     <CheckBox
         android:id="@+id/saturday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/checkbox"
         app:layout_constraintBottom_toBottomOf="@+id/saturday_coretime_end"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/saturday_coretime_end" />
+        app:layout_constraintStart_toEndOf="@+id/saturday_coretime_end"
+        app:layout_constraintTop_toBottomOf="@+id/friday_coretime_end" />
 
     <CheckBox
         android:id="@+id/sunday_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8sp"
-        android:text="@string/core_time_label"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sunday_coretime_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sunday_coretime_end" />
-
-    <EditText
-        android:id="@+id/lab_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="8sp"
-        android:ems="10"
-        android:hint="@string/lab_hint"
-        android:inputType="text"
-        android:textSize="27sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/sunday_coretime_end"
+        app:layout_constraintStart_toEndOf="@+id/sunday_coretime_end"
+        app:layout_constraintTop_toBottomOf="@+id/saturday_coretime_end" />
+
+    <Spinner
+        android:id="@+id/lab_spinner"
+        android:layout_width="246sp"
+        android:layout_height="37sp"
+        android:layout_marginStart="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lab_label" />
+
+    <EditText
+        android:id="@+id/name_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28sp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/name"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_label" />
+
+    <EditText
+        android:id="@+id/studentid_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studentId_label" />
 
 </android.support.constraint.ConstraintLayout>

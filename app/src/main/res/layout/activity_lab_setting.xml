@@ -463,6 +463,7 @@
         android:contentDescription="@string/register"
         android:elevation="16sp"
         android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sunday_coretime_end" />

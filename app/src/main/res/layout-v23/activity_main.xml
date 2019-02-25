@@ -22,7 +22,6 @@
         android:elevation="25sp"
         android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@+id/exit"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,20 +46,25 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8sp"
         android:layout_marginEnd="16sp"
         android:layout_weight="1"
         android:background="@drawable/register"
         android:contentDescription="@drawable/register"
         android:elevation="15sp"
         android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/exit"
         app:layout_constraintEnd_toStartOf="@+id/edit"
-        tools:layout_editor_absoluteY="300sp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter" />
 
     <ImageButton
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8sp"
         android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
         android:layout_marginBottom="8sp"
         android:layout_weight="1"
         android:background="@drawable/edit"
@@ -68,22 +72,26 @@
         android:elevation="15sp"
         android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter"
-        app:layout_constraintVertical_bias="0.497"
-        tools:layout_editor_absoluteX="155sp" />
+        app:layout_constraintVertical_bias="0.497" />
 
     <ImageButton
         android:id="@+id/history"
-        android:layout_width="100sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12sp"
+        android:layout_marginStart="16sp"
+        android:layout_marginEnd="8sp"
         android:layout_weight="1"
         android:background="@drawable/history"
         android:contentDescription="@drawable/history"
         android:elevation="15sp"
         android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit"
-        tools:ignore="RtlHardcoded"
-        tools:layout_editor_absoluteY="301sp" />
+        app:layout_constraintTop_toBottomOf="@+id/enter"
+        tools:ignore="RtlHardcoded" />
 
 </android.support.constraint.ConstraintLayout>

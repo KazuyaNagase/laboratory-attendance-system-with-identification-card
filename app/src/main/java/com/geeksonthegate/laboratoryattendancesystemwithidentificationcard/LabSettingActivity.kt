@@ -65,9 +65,15 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         // 前画面から研究室IDを受け取り、IDを基に研究室DBから情報を取得 取得できない場合は新規研究室を作成
         val labId: String = intent.getStringExtra("lab_id")
         realm = Realm.getDefaultInstance()
+
         val lab = realm.where(Lab::class.java).equalTo("labId", labId).findFirst()
                 ?: Lab(labName = "新規", coreTimeArray = coreTimeList)
-        coreTimeList = lab.coreTimeArray ?: coreTimeList
+
+        try {
+            Lab(labName = "tanaka90", coreTimeArray = coreTimeList)
+        } catch (e: Exception) {
+            Toast.makeText(this, "ふせい", Toast.LENGTH_SHORT).show()
+        }
 
         // 取得もしくは生成した研究室情報から画面描画・リスナにクリック・表示内容変更イベントを登録
         // TODO: 時刻設定のValidationが編集中にも適用されてしまう 編集が終わってから検証するようにする
@@ -115,37 +121,34 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         // 登録ボタンのクリックイベントをリスナに登録
         // 研究室名が「新規」もしくは空の場合は登録を拒否
         lab_register_button.setOnClickListener {
-            try {
-                if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "") {
-                    val nextIntent = Intent(this, StudentSettingActivity::class.java)
-                    realm.executeTransaction {
-                        lab.labName = lab_name.text.toString()
-                        for (i in 0..6) {
-                            var hourAndMinute = startCoreTimeLabelList[i].text.split(":")
-                            val cal = Calendar.getInstance()
-                            cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
-                            cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                            lab.coreTimeArray!![i]!!.startCoreTime = cal.time
-                            hourAndMinute = endCoreTimeLabelList[i].text.split(":")
-                            cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
-                            cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                            lab.coreTimeArray!![i]!!.endCoreTime = cal.time
-                            lab.coreTimeArray!![i]!!.isCoreDay = isCoreDayBoxList[i].isChecked
-                        }
-                        it.insertOrUpdate(lab)
-                    }
-                    nextIntent.putExtra("scan_label", scanLabel)
-                    nextIntent.putExtra("idm", idm)
-                    nextIntent.putExtra("lab_id", lab.labId)
-                    startActivity(nextIntent)
-                } else {
-                    Toast.makeText(this, "研究室名を入力してください", Toast.LENGTH_SHORT).show()
+            if (lab_name.text.length > 7) {
+                Toast.makeText(this, "研究室名は7文字以内で入力してください", Toast.LENGTH_SHORT).show()
+            } else if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "") {
+                val nextIntent = Intent(this, StudentSettingActivity::class.java)
+                lab.labName = lab_name.text.toString()
+                for (i in 0..6) {
+                    var hourAndMinute = startCoreTimeLabelList[i].text.split(":")
+                    val cal = Calendar.getInstance()
+                    cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
+                    cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
+                    lab.coreTimeArray!![i]!!.startCoreTime = cal.time
+                    hourAndMinute = endCoreTimeLabelList[i].text.split(":")
+                    cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
+                    cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
+                    lab.coreTimeArray!![i]!!.endCoreTime = cal.time
+                    lab.coreTimeArray!![i]!!.isCoreDay = isCoreDayBoxList[i].isChecked
                 }
-            } catch (e: Exception) {
+                realm.executeTransaction { it.insertOrUpdate(lab) }
+
+                nextIntent.putExtra("scan_label", scanLabel)
+                nextIntent.putExtra("idm", idm)
+                nextIntent.putExtra("lab_id", lab.labId)
+                startActivity(nextIntent)
+            } else {
+                Toast.makeText(this, "研究室名を入力してください", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         realm.close()

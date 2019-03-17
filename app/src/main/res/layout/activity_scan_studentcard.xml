@@ -7,53 +7,37 @@
     android:layout_height="match_parent"
     tools:context=".ScanStudentcardActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        tools:context=".ScanStudentcardActivity">
-
-        <Button
-            android:id="@+id/btnShowAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="text"/>
-    </LinearLayout>
-
     <TextView
         android:id="@+id/scan_card_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="37dp"
-        android:text="学生証をスキャンしてください"
+        android:layout_height="28sp"
+        android:text="@string/NotificationText"
         android:textColor="#212121"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="sans"
+        app:layout_constraintBottom_toTopOf="@+id/studentcard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
     <ImageView
         android:id="@+id/studentcard"
-        android:layout_width="283dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
-        android:layout_marginTop="54dp"
         android:layout_weight="1"
         android:background="@drawable/studentid"
-        android:elevation="25dp"
+        android:contentDescription="@string/todo"
+        android:elevation="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/scan_card_label" />
 
     <ImageView
         android:id="@+id/background"
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/background"
         android:scaleType="fitXY"

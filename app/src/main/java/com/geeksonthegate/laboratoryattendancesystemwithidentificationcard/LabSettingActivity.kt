@@ -62,7 +62,7 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         }
 
         // 前画面から研究室IDを受け取り、IDを基に研究室DBから情報を取得 取得できない場合は新規研究室を作成
-        val labId = intent.getStringExtra("lab_id")
+        val labId:String= intent.getStringExtra("lab_id")
         realm = Realm.getDefaultInstance()
         val lab = realm.where(Lab::class.java).equalTo("labId", labId).findFirst()
                 ?: Lab(labName = "新規", coreTimeArray = coreTimeList)

@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         realm = Realm.getDefaultInstance()
-/*
+
         // TODO: 学生・研究室情報登録が完璧になったらこのダミーデータは削除する
         // 以降、テスト用ダミーデータの登録
-        // 研究室
+       /* // 研究室
         val coreTimeArrayF = RealmList<CoreTime>()
         // 福田研コアタイム
         for (i in 0..6) {

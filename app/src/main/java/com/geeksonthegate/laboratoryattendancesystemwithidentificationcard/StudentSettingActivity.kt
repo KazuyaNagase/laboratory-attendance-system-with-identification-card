@@ -117,7 +117,6 @@ class StudentSettingActivity : AppCompatActivity() {
             val selectedLab = lab_spinner.selectedItem as Lab
             if (selectedLab.labName != "新規") {
                 student = Student(Arrays.toString(idm), studentid_entry.text.toString(), name_entry.text.toString(), selectedLab)
-                //student = Student(idm.toString(), studentid_entry.text.toString(), name_entry.text.toString(), selectedLab)
                 realm.executeTransaction { it.insertOrUpdate(student) }
                 startActivity(nextIntent)
             } else {
@@ -133,7 +132,7 @@ class StudentSettingActivity : AppCompatActivity() {
                     Toast.makeText(this, "学籍番号は7文字で入力してください", Toast.LENGTH_SHORT).show()
                 }
                 if(e.message=="Invalid name"){
-                    Toast.makeText(this, "名前は１文字以上7文字で以下で入力してください", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "名前は1文字以上7文字で以下で入力してください", Toast.LENGTH_SHORT).show()
                 }
             }
         }

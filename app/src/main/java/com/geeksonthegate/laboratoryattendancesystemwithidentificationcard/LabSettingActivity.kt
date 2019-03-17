@@ -18,7 +18,6 @@ import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.model
 import io.realm.Realm
 import io.realm.RealmList
 import kotlinx.android.synthetic.main.activity_lab_setting.*
-import java.lang.Exception
 import java.util.*
 
 class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
@@ -68,13 +67,6 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
 
         val lab = realm.where(Lab::class.java).equalTo("labId", labId).findFirst()
                 ?: Lab(labName = "新規", coreTimeArray = coreTimeList)
-
-        try {
-            Lab(labName = "tanaka90", coreTimeArray = coreTimeList)
-        } catch (e: Exception) {
-            Toast.makeText(this, "ふせい", Toast.LENGTH_SHORT).show()
-        }
-
         // 取得もしくは生成した研究室情報から画面描画・リスナにクリック・表示内容変更イベントを登録
         // TODO: 時刻設定のValidationが編集中にも適用されてしまう 編集が終わってから検証するようにする
         lab_name.setText(lab.labName)
@@ -121,9 +113,7 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         // 登録ボタンのクリックイベントをリスナに登録
         // 研究室名が「新規」もしくは空の場合は登録を拒否
         lab_register_button.setOnClickListener {
-            if (lab_name.text.length > 7) {
-                Toast.makeText(this, "研究室名は7文字以内で入力してください", Toast.LENGTH_SHORT).show()
-            } else if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "") {
+            if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "" && lab_name.text.length <= 7) {
                 val nextIntent = Intent(this, StudentSettingActivity::class.java)
                 lab.labName = lab_name.text.toString()
                 for (i in 0..6) {
@@ -131,12 +121,12 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
                     val cal = Calendar.getInstance()
                     cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
                     cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                    lab.coreTimeArray!![i]!!.startCoreTime = cal.time
+                    lab.coreTimeArray?.get(i)?.startCoreTime = cal.time
                     hourAndMinute = endCoreTimeLabelList[i].text.split(":")
                     cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
                     cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                    lab.coreTimeArray!![i]!!.endCoreTime = cal.time
-                    lab.coreTimeArray!![i]!!.isCoreDay = isCoreDayBoxList[i].isChecked
+                    lab.coreTimeArray?.get(i)?.endCoreTime = cal.time
+                    lab.coreTimeArray?.get(i)?.isCoreDay = isCoreDayBoxList[i].isChecked
                 }
                 realm.executeTransaction { it.insertOrUpdate(lab) }
 
@@ -144,11 +134,14 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
                 nextIntent.putExtra("idm", idm)
                 nextIntent.putExtra("lab_id", lab.labId)
                 startActivity(nextIntent)
+            } else if (lab_name.text.length > 7) {
+                Toast.makeText(this, "研究室名は7文字以内で入力してください", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "研究室名を入力してください", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         realm.close()

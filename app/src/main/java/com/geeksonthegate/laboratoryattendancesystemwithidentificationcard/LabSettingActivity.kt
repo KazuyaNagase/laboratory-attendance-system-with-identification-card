@@ -31,10 +31,9 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lab_setting)
 
-        // 前画面のタイトルを適用
         val scanLabel = intent.getStringExtra("scan_label")
-        title = scanLabel
         val idm = intent.getByteArrayExtra("idm")
+
 
         // 画面下部のコアタイム一覧の各パーツを取得
         startCoreTimeLabelList = listOf<TextView>(monday_coretime_start,
@@ -110,26 +109,34 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         // コアタイムリストを表示する
         setCoreTimeArea(coreTimeList)
 
+        //タイトルの設定
+        if (lab_name.text.toString() == "新規")
+            setTitle(R.string.register_lab)
+        else
+            setTitle(R.string.edit_lab)
+        
+
         // 登録ボタンのクリックイベントをリスナに登録
         // 研究室名が「新規」もしくは空の場合は登録を拒否
         lab_register_button.setOnClickListener {
             if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "" && lab_name.text.length <= 7) {
                 val nextIntent = Intent(this, StudentSettingActivity::class.java)
-                lab.labName = lab_name.text.toString()
-                for (i in 0..6) {
-                    var hourAndMinute = startCoreTimeLabelList[i].text.split(":")
-                    val cal = Calendar.getInstance()
-                    cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
-                    cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                    lab.coreTimeArray?.get(i)?.startCoreTime = cal.time
-                    hourAndMinute = endCoreTimeLabelList[i].text.split(":")
-                    cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
-                    cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                    lab.coreTimeArray?.get(i)?.endCoreTime = cal.time
-                    lab.coreTimeArray?.get(i)?.isCoreDay = isCoreDayBoxList[i].isChecked
+                realm.executeTransaction {
+                    lab.labName = lab_name.text.toString()
+                    for (i in 0..6) {
+                        var hourAndMinute = startCoreTimeLabelList[i].text.split(":")
+                        val cal = Calendar.getInstance()
+                        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
+                        cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
+                        lab.coreTimeArray?.get(i)?.startCoreTime = cal.time
+                        hourAndMinute = endCoreTimeLabelList[i].text.split(":")
+                        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
+                        cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
+                        lab.coreTimeArray?.get(i)?.endCoreTime = cal.time
+                        lab.coreTimeArray?.get(i)?.isCoreDay = isCoreDayBoxList[i].isChecked
+                    }
+                    it.insertOrUpdate(lab)
                 }
-                realm.executeTransaction { it.insertOrUpdate(lab) }
-
                 nextIntent.putExtra("scan_label", scanLabel)
                 nextIntent.putExtra("idm", idm)
                 nextIntent.putExtra("lab_id", lab.labId)

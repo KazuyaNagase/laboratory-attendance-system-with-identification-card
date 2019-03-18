@@ -45,10 +45,21 @@ class StudentSettingActivity : AppCompatActivity() {
 
         realm = Realm.getDefaultInstance()
         val scanLabel = intent.getStringExtra("scan_label")
+
         val idm = intent.getByteArrayExtra("idm")
         val labId = intent.getStringExtra("lab_id")
         val nextIntent = Intent(this, MainActivity::class.java)
         val labIntent = Intent(this, LabSettingActivity::class.java)
+
+        //タイトルの設定
+        when (scanLabel) {
+            getString(R.string.register) -> {
+                setTitle(R.string.register_student)
+            }
+            getString(R.string.edit) -> {
+                setTitle(R.string.edit_student)
+            }
+        }
 
 
         // 前画面から受け取ったIDmで検索する
@@ -119,7 +130,7 @@ class StudentSettingActivity : AppCompatActivity() {
                     realm.executeTransaction { it.insertOrUpdate(student) }
                     startActivity(nextIntent)
                 } else {
-                    labIntent.putExtra("scan_label", title)
+                    labIntent.putExtra("scan_label", scanLabel)
                     labIntent.putExtra("idm", idm)
                     //研究室名が「新規」の場合はlab_Idがないので空文字
                     labIntent.putExtra("lab_id", "")
@@ -154,12 +165,15 @@ class StudentSettingActivity : AppCompatActivity() {
             endCoreTimeLabelList[i].text = DateFormat.format("kk:mm", coreTimeList[i].endCoreTime)
             isCoreDayBoxList[i].isChecked = coreTimeList[i].isCoreDay ?: true
             startCoreTimeLabelList[i].setOnClickListener {
+                nextIntent.putExtra("scan_label",scanLabel)
                 startActivity(nextIntent)
             }
             endCoreTimeLabelList[i].setOnClickListener {
+                nextIntent.putExtra("scan_label",scanLabel)
                 startActivity(nextIntent)
             }
             isCoreDayBoxList[i].setOnClickListener {
+                nextIntent.putExtra("scan_label",scanLabel)
                 startActivity(nextIntent)
             }
         }

@@ -46,7 +46,6 @@ class StudentSettingActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
         val scanLabel = intent.getStringExtra("scan_label")
         val idm = intent.getByteArrayExtra("idm")
-        Toast.makeText(this, Arrays.toString(idm), Toast.LENGTH_SHORT).show()
         val labId = intent.getStringExtra("lab_id")
         val nextIntent = Intent(this, MainActivity::class.java)
         val labIntent = Intent(this, LabSettingActivity::class.java)
@@ -125,7 +124,6 @@ class StudentSettingActivity : AppCompatActivity() {
                     //研究室名が「新規」の場合はlab_Idがないので空文字
                     labIntent.putExtra("lab_id", "")
                     startActivity(labIntent)
-                    Toast.makeText(this, "研究室登録をしてください", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 if (e.message == "Invalid studentId") {

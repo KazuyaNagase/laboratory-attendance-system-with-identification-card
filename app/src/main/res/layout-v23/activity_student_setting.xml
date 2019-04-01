@@ -73,11 +73,10 @@
         android:id="@+id/coretime_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28sp"
         android:text="@string/coretime_label"
         android:textColor="@color/colorAccent"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/studentid_entry"
         app:layout_constraintTop_toBottomOf="@+id/studentid_entry"
         tools:ignore="MissingConstraints" />
 
@@ -186,62 +185,6 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/suday_start_end_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="8sp"
-        android:text="@string/start_end"
-        android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/coretime_start"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/coretime_start"
-        app:layout_constraintTop_toTopOf="@+id/coretime_start"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/core_time_custom_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:text="@string/core_time_custom_label"
-        android:textColor="@color/colorAccent"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coretime_start"
-        app:layout_constraintVertical_bias="0.018"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/coretime_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28sp"
-        android:text="@string/coretime_start"
-        android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coretime_label"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/coretime_end"
-        android:layout_width="wrap_content"
-        android:layout_height="39sp"
-        android:layout_marginStart="32sp"
-        android:layout_marginTop="8sp"
-        android:text="@string/coretime_end"
-        android:textColor="@color/colorAccent"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/suday_start_end_label"
-        app:layout_constraintStart_toEndOf="@+id/suday_start_end_label"
-        app:layout_constraintTop_toTopOf="@+id/suday_start_end_label"
-        app:layout_constraintVertical_bias="0.8"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
         android:id="@+id/monday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -250,7 +193,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/core_time_custom_label"
+        app:layout_constraintTop_toBottomOf="@+id/coretime_label"
         tools:ignore="MissingConstraints" />
 
     <TextView

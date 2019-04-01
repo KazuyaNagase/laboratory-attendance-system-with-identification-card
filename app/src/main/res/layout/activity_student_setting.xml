@@ -199,9 +199,9 @@
         android:text="@string/monday"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/coretime_label"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="385dp" />
+        tools:layout_editor_absoluteX="28dp" />
 
     <TextView
         android:id="@+id/tuesday"

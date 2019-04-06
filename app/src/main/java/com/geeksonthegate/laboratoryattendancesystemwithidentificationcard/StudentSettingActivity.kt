@@ -15,6 +15,7 @@ import com.geeksonthegate.laboratoryattendancesystemwithidentificationcard.model
 import io.realm.Realm
 import io.realm.RealmList
 import kotlinx.android.synthetic.main.activity_student_setting.*
+import java.lang.Exception
 import java.util.*
 
 class StudentSettingActivity : AppCompatActivity() {
@@ -44,9 +45,22 @@ class StudentSettingActivity : AppCompatActivity() {
 
         realm = Realm.getDefaultInstance()
         val scanLabel = intent.getStringExtra("scan_label")
+
         val idm = intent.getByteArrayExtra("idm")
         val labId = intent.getStringExtra("lab_id")
         val nextIntent = Intent(this, MainActivity::class.java)
+        val labIntent = Intent(this, LabSettingActivity::class.java)
+
+        //タイトルの設定
+        when (scanLabel) {
+            getString(R.string.register) -> {
+                setTitle(R.string.register_student)
+            }
+            getString(R.string.edit) -> {
+                setTitle(R.string.edit_student)
+            }
+        }
+
 
         // 前画面から受け取ったIDmで検索する
         var student: Student? = realm.where(Student::class.java).equalTo("idm", Arrays.toString(idm)).findFirst()
@@ -109,13 +123,26 @@ class StudentSettingActivity : AppCompatActivity() {
         // 登録ボタンが押されたら画面情報を基にStudentデータを登録
         // 研究室名が「新規」の場合は登録を拒否し研究室入力を促す
         user_register_button.setOnClickListener {
-            val selectedLab = lab_spinner.selectedItem as Lab
-            if (selectedLab.labName != "新規") {
-                student = Student(Arrays.toString(idm), studentid_entry.text.toString(), name_entry.text.toString(), selectedLab)
-                realm.executeTransaction { it.insertOrUpdate(student) }
-                startActivity(nextIntent)
-            } else {
-                Toast.makeText(this, "研究室登録をしてください", Toast.LENGTH_SHORT).show()
+            try {
+                val selectedLab = lab_spinner.selectedItem as Lab
+                if (selectedLab.labName != "新規") {
+                    student = Student(Arrays.toString(idm), studentid_entry.text.toString(), name_entry.text.toString(), selectedLab)
+                    realm.executeTransaction { it.insertOrUpdate(student) }
+                    startActivity(nextIntent)
+                } else {
+                    labIntent.putExtra("scan_label", scanLabel)
+                    labIntent.putExtra("idm", idm)
+                    //研究室名が「新規」の場合はlab_Idがないので空文字
+                    labIntent.putExtra("lab_id", "")
+                    startActivity(labIntent)
+                }
+            } catch (e: Exception) {
+                if (e.message == "Invalid studentId") {
+                    Toast.makeText(this, "学籍番号は7文字で入力してください", Toast.LENGTH_SHORT).show()
+                }
+                if (e.message == "Invalid name") {
+                    Toast.makeText(this, "名前は1文字以上7文字で以下で入力してください", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -138,12 +165,15 @@ class StudentSettingActivity : AppCompatActivity() {
             endCoreTimeLabelList[i].text = DateFormat.format("kk:mm", coreTimeList[i].endCoreTime)
             isCoreDayBoxList[i].isChecked = coreTimeList[i].isCoreDay ?: true
             startCoreTimeLabelList[i].setOnClickListener {
+                nextIntent.putExtra("scan_label",scanLabel)
                 startActivity(nextIntent)
             }
             endCoreTimeLabelList[i].setOnClickListener {
+                nextIntent.putExtra("scan_label",scanLabel)
                 startActivity(nextIntent)
             }
             isCoreDayBoxList[i].setOnClickListener {
+                nextIntent.putExtra("scan_label",scanLabel)
                 startActivity(nextIntent)
             }
         }

@@ -31,10 +31,9 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lab_setting)
 
-        // 前画面のタイトルを適用
         val scanLabel = intent.getStringExtra("scan_label")
-        title = scanLabel
         val idm = intent.getByteArrayExtra("idm")
+
 
         // 画面下部のコアタイム一覧の各パーツを取得
         startCoreTimeLabelList = listOf<TextView>(monday_coretime_start,
@@ -62,12 +61,11 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         }
 
         // 前画面から研究室IDを受け取り、IDを基に研究室DBから情報を取得 取得できない場合は新規研究室を作成
-        val labId = intent.getStringExtra("lab_id")
+        val labId: String = intent.getStringExtra("lab_id")
         realm = Realm.getDefaultInstance()
+
         val lab = realm.where(Lab::class.java).equalTo("labId", labId).findFirst()
                 ?: Lab(labName = "新規", coreTimeArray = coreTimeList)
-        coreTimeList = lab.coreTimeArray ?: coreTimeList
-
         // 取得もしくは生成した研究室情報から画面描画・リスナにクリック・表示内容変更イベントを登録
         // TODO: 時刻設定のValidationが編集中にも適用されてしまう 編集が終わってから検証するようにする
         lab_name.setText(lab.labName)
@@ -111,10 +109,17 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
         // コアタイムリストを表示する
         setCoreTimeArea(coreTimeList)
 
+        //タイトルの設定
+        if (lab_name.text.toString() == "新規")
+            setTitle(R.string.register_lab)
+        else
+            setTitle(R.string.edit_lab)
+        
+
         // 登録ボタンのクリックイベントをリスナに登録
         // 研究室名が「新規」もしくは空の場合は登録を拒否
         lab_register_button.setOnClickListener {
-            if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "") {
+            if (lab_name.text.toString() != "新規" && lab_name.text.toString() != "" && lab_name.text.length <= 7) {
                 val nextIntent = Intent(this, StudentSettingActivity::class.java)
                 realm.executeTransaction {
                     lab.labName = lab_name.text.toString()
@@ -123,12 +128,12 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
                         val cal = Calendar.getInstance()
                         cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
                         cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                        lab.coreTimeArray!![i]!!.startCoreTime = cal.time
+                        lab.coreTimeArray?.get(i)?.startCoreTime = cal.time
                         hourAndMinute = endCoreTimeLabelList[i].text.split(":")
                         cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourAndMinute[0]))
                         cal.set(Calendar.MINUTE, Integer.parseInt(hourAndMinute[1]))
-                        lab.coreTimeArray!![i]!!.endCoreTime = cal.time
-                        lab.coreTimeArray!![i]!!.isCoreDay = isCoreDayBoxList[i].isChecked
+                        lab.coreTimeArray?.get(i)?.endCoreTime = cal.time
+                        lab.coreTimeArray?.get(i)?.isCoreDay = isCoreDayBoxList[i].isChecked
                     }
                     it.insertOrUpdate(lab)
                 }
@@ -136,6 +141,8 @@ class LabSettingActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListen
                 nextIntent.putExtra("idm", idm)
                 nextIntent.putExtra("lab_id", lab.labId)
                 startActivity(nextIntent)
+            } else if (lab_name.text.length > 7) {
+                Toast.makeText(this, "研究室名は7文字以内で入力してください", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "研究室名を入力してください", Toast.LENGTH_SHORT).show()
             }

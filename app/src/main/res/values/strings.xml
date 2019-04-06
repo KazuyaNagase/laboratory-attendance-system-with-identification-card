@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">ラボ入退室管理</string>
+    <string name="register_student">学生情報登録</string>
+    <string name="edit_student">学生情報編集</string>
+    <string name="register_lab">研究室情報登録</string>
+    <string name="edit_lab">研究室情報編集</string>
     <string name="enter">入室</string>
     <string name="exit">退室</string>
     <string name="register">登録</string>

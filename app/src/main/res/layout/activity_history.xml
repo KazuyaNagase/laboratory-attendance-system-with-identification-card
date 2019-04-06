@@ -7,8 +7,10 @@
     tools:context=".history">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="395dp"
+        android:layout_width="394dp"
         android:layout_height="715dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
